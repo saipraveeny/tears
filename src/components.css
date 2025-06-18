@@ -1077,3 +1077,119 @@
     padding: 1.5rem;
   }
 }
+
+/* Confirmation Modal Styles */
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.confirmation-content {
+  width: 100%;
+  max-width: 400px;
+  background: var(--glass-bg);
+  border-radius: var(--border-radius-large);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.confirmation-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-white);
+  text-align: center;
+}
+.confirmation-product {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.confirmation-product-info {
+  margin-bottom: 1rem;
+}
+.confirmation-product-name {
+  font-weight: 600;
+  color: var(--text-white);
+  margin-bottom: 0.25rem;
+}
+.confirmation-product-description {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.confirmation-product-price {
+  color: var(--accent-red);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.confirmation-quantity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.quantity-label {
+  color: var(--text-gray);
+  font-weight: 500;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.quantity-btn {
+  background: var(--secondary-black);
+  color: var(--text-white);
+  border: none;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quantity-btn:hover {
+  background: var(--accent-red);
+}
+.quantity-display {
+  min-width: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-white);
+}
+.confirmation-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-red);
+  margin-bottom: 1.5rem;
+}
+.total-price {
+  margin-left: 0.5rem;
+}
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  .confirmation-content {
+    max-width: 95vw;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+}

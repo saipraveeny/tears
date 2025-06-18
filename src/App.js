@@ -10,6 +10,8 @@ import {
   Menu,
   X,
   ShoppingCart,
+  Plus,
+  Minus,
 } from "lucide-react";
 import "./App.css";
 import "./components.css";
@@ -29,6 +31,11 @@ function App() {
   const [scrollY, setScrollY] = useState(0);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState({
+    isOpen: false,
+    product: null,
+    quantity: 1,
+  });
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -56,6 +63,34 @@ function App() {
       return [...prev, { ...product, qty: 1 }];
     });
   };
+
+  const showConfirmationModal = (product) => {
+    setConfirmationModal({ isOpen: true, product, quantity: 1 });
+  };
+
+  const confirmAddToCart = () => {
+    const { product, quantity } = confirmationModal;
+    if (!product) return;
+
+    setCart((prev) => {
+      const found = prev.find((item) => item.id === product.id);
+      if (found) {
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + quantity } : item
+        );
+      }
+      return [...prev, { ...product, qty: quantity }];
+    });
+    setConfirmationModal({ isOpen: false, product: null, quantity: 1 });
+  };
+
+  const updateConfirmationQuantity = (newQuantity) => {
+    setConfirmationModal((prev) => ({
+      ...prev,
+      quantity: Math.max(1, newQuantity),
+    }));
+  };
+
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
@@ -159,6 +194,125 @@ function App() {
     </AnimatePresence>
   );
 
+  // Confirmation Modal
+  const ConfirmationModal = () => (
+    <motion.div
+      className="confirmation-modal"
+      style={{ display: confirmationModal.isOpen ? "flex" : "none" }}
+      initial={false}
+      animate={confirmationModal.isOpen ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={() =>
+        setConfirmationModal({ isOpen: false, product: null, quantity: 1 })
+      }
+    >
+      <motion.div
+        className="confirmation-content glass-strong"
+        initial={false}
+        animate={
+          confirmationModal.isOpen
+            ? { scale: 1, opacity: 1 }
+            : { scale: 0.95, opacity: 0 }
+        }
+        transition={{ duration: 0.2 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          className="modal-close"
+          onClick={() =>
+            setConfirmationModal({ isOpen: false, product: null, quantity: 1 })
+          }
+        >
+          ×
+        </button>
+        <h2 className="confirmation-title">Add to Cart</h2>
+
+        <div className="confirmation-product">
+          <div className="confirmation-product-info">
+            <h3 className="confirmation-product-name">
+              {confirmationModal.product?.name}
+            </h3>
+            <p className="confirmation-product-description">
+              {confirmationModal.product?.description}
+            </p>
+            <div className="confirmation-product-price">
+              {confirmationModal.product?.price}
+            </div>
+          </div>
+
+          <div className="confirmation-quantity">
+            <label className="quantity-label">Quantity:</label>
+            <div className="quantity-controls">
+              <motion.button
+                className="quantity-btn"
+                onClick={() =>
+                  updateConfirmationQuantity(confirmationModal.quantity - 1)
+                }
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Minus size={16} />
+              </motion.button>
+              <span className="quantity-display">
+                {confirmationModal.quantity}
+              </span>
+              <motion.button
+                className="quantity-btn"
+                onClick={() =>
+                  updateConfirmationQuantity(confirmationModal.quantity + 1)
+                }
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Plus size={16} />
+              </motion.button>
+            </div>
+          </div>
+
+          <div className="confirmation-total">
+            <span>Total: </span>
+            <span className="total-price">
+              {confirmationModal.product &&
+                (
+                  parseFloat(confirmationModal.product.price.replace("$", "")) *
+                  confirmationModal.quantity
+                ).toLocaleString(undefined, {
+                  style: "currency",
+                  currency: "USD",
+                })}
+            </span>
+          </div>
+        </div>
+
+        <div className="confirmation-actions">
+          <motion.button
+            className="btn btn-primary"
+            onClick={confirmAddToCart}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ShoppingCart size={16} />
+            Add to Cart
+          </motion.button>
+          <motion.button
+            className="btn btn-secondary"
+            onClick={() =>
+              setConfirmationModal({
+                isOpen: false,
+                product: null,
+                quantity: 1,
+              })
+            }
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Cancel
+          </motion.button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+
   return (
     <div className="App">
       {/* Navigation */}
@@ -260,11 +414,18 @@ function App() {
       {/* Cart Modal */}
       <CartModal />
 
+      {/* Confirmation Modal */}
+      <ConfirmationModal />
+
       {/* Main Content */}
       <main>
         <Hero logo={logo} />
         <Features />
-        <Products addToCart={addToCart} openCart={() => setIsCartOpen(true)} />
+        <Products
+          addToCart={addToCart}
+          openCart={() => setIsCartOpen(true)}
+          showConfirmationModal={showConfirmationModal}
+        />
         <Benefits />
         <Testimonials />
         <Contact />

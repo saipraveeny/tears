@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Flame, Star, ShoppingCart, Eye } from "lucide-react";
 
-const Products = ({ addToCart, openCart }) => {
+const Products = ({ addToCart, openCart, showConfirmationModal }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -176,7 +176,7 @@ const Products = ({ addToCart, openCart }) => {
                     whileTap={{ scale: 0.95 }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      addToCart(product);
+                      showConfirmationModal(product);
                     }}
                   >
                     <ShoppingCart size={16} />
