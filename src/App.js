@@ -55,6 +55,16 @@ function App() {
     { name: "Contact", href: "#contact" },
   ];
 
+  // Special bundle product
+  const bundleProduct = {
+    id: "bundle-160",
+    name: "Special Bundle: All 3 Variants + Tube",
+    price: "₹160.00",
+    description: "Get all 3 hot sauce variants and a tube for just ₹160!",
+    qty: 1,
+    isBundle: true,
+  };
+
   // Cart handlers
   const addToCart = (product) => {
     setCart((prev) => {
@@ -169,12 +179,15 @@ function App() {
                     .reduce(
                       (sum, item) =>
                         sum +
-                        parseFloat(item.price.replace("$", "")) * item.qty,
+                        parseFloat(item.price.replace(/[^\d.]/g, "")) *
+                          item.qty,
                       0
                     )
-                    .toLocaleString(undefined, {
+                    .toLocaleString("en-IN", {
                       style: "currency",
-                      currency: "USD",
+                      currency: "INR",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
                     })}
                 </div>
                 <button
@@ -303,11 +316,13 @@ function App() {
                 {confirmationModal.product &&
                   (
                     parseFloat(
-                      confirmationModal.product.price.replace("$", "")
+                      confirmationModal.product.price.replace(/[^\d.]/g, "")
                     ) * confirmationModal.quantity
-                  ).toLocaleString(undefined, {
+                  ).toLocaleString("en-IN", {
                     style: "currency",
-                    currency: "USD",
+                    currency: "INR",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
                   })}
               </span>
             </div>
@@ -455,6 +470,7 @@ function App() {
           addToCart={addToCart}
           openCart={() => setIsCartOpen(true)}
           showConfirmationModal={showConfirmationModal}
+          addBundleToCart={bundleProduct}
         />
         <Benefits />
         <Testimonials />

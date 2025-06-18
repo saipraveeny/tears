@@ -1378,3 +1378,74 @@
     max-height: 220px;
   }
 }
+
+.great-deal-panel {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0.85) 60%,
+    rgba(115, 18, 18, 0.85) 100%
+  );
+  border-radius: 2.2rem;
+  box-shadow: 0 8px 32px rgba(80, 80, 180, 0.13);
+  border: 1.5px solid rgba(180, 180, 255, 0.18);
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  padding: 3rem 2.2rem 2.2rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+.great-deal-panel:hover {
+  box-shadow: 0 16px 48px rgba(80, 80, 180, 0.18),
+    0 2px 12px rgba(80, 80, 180, 0.1);
+  transform: translateY(-2px) scale(1.01);
+}
+.great-deal-content {
+  text-align: center;
+}
+.great-deal-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fdfdfd;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  text-shadow: 0 2px 8px rgba(80, 80, 180, 0.07);
+}
+.great-deal-desc {
+  font-size: 1.18rem;
+  margin-bottom: 1.3rem;
+  color: #919aac;
+  font-weight: 500;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+.great-deal-price {
+  color: hwb(4 14% 6% / 0.897);
+  font-weight: 900;
+  font-size: 2rem;
+  margin-left: 0.2em;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+.great-deal-btn {
+  margin-top: 0.7rem;
+  font-size: 1.13rem;
+  padding: 1rem 2.7rem;
+  border-radius: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(80, 80, 180, 0.08);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+@media (max-width: 600px) {
+  .great-deal-panel {
+    padding: 1.5rem 0.5rem;
+  }
+  .great-deal-btn {
+    width: 100%;
+    padding: 1rem 0;
+  }
+}

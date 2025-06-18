@@ -13,7 +13,12 @@ import wildJpg from "../assets/wild.jpg";
 import glitchJpg from "../assets/glitch.jpg";
 import cohcJpg from "../assets/cohc.jpg";
 
-const Products = ({ addToCart, openCart, showConfirmationModal }) => {
+const Products = ({
+  addToCart,
+  openCart,
+  showConfirmationModal,
+  addBundleToCart,
+}) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -28,7 +33,7 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
       description:
         "A bold blend of habanero and ghost peppers with aromatic herbs",
       heatLevel: 5,
-      price: "$24.99",
+      price: "₹60.00",
       color: "#ff3b30",
       features: ["Extra Hot", "Herb Infused", "Smoky Finish"],
       image: wildImage,
@@ -38,8 +43,8 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
       name: "Glitch",
       description: "Innovative fusion of Carolina Reaper and exotic spices",
       heatLevel: 4,
-      price: "$29.99",
-      color: "#ff6b61",
+      price: "₹60.00",
+      color: "#0f222b",
       features: ["Reaper Blend", "Exotic Spices", "Complex Heat"],
       image: glitchImage,
     },
@@ -49,8 +54,8 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
       description:
         "Classic habanero with citrus undertones and perfect balance",
       heatLevel: 3,
-      price: "$19.99",
-      color: "#ff8a80",
+      price: "₹60.00",
+      color: "#ffe3e2",
       features: ["Citrus Notes", "Balanced Heat", "Versatile"],
       image: cohcImage,
     },
@@ -90,20 +95,6 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
   return (
     <section id="products" className="products">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">
-            Our <span className="text-gradient">Bold Variants</span>
-          </h2>
-          <p className="section-subtitle">
-            Three distinct flavors, one revolutionary experience
-          </p>
-        </motion.div>
-
         <motion.div
           className="products-grid"
           ref={ref}
@@ -190,6 +181,29 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Great Deal Panel (moved below products) */}
+        <motion.div
+          className="great-deal-panel"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <div className="great-deal-content">
+            <div className="great-deal-title">Great Deal</div>
+            <div className="great-deal-desc">
+              <b>All 3 Variants + Tube</b> for just{" "}
+              <span className="great-deal-price">₹160.00</span>
+            </div>
+            <button
+              className="btn btn-primary great-deal-btn"
+              onClick={addBundleToCart}
+            >
+              Buy Bundle
+            </button>
+          </div>
         </motion.div>
 
         <motion.div
