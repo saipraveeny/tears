@@ -4,11 +4,6 @@ import { useInView } from "react-intersection-observer";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 const Contact = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",

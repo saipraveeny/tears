@@ -1,18 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import {
-  Flame,
-  Heart,
-  Zap,
-  Star,
-  ChevronDown,
-  Menu,
-  X,
-  ShoppingCart,
-  Plus,
-  Minus,
-} from "lucide-react";
+import { ShoppingCart, Plus, Minus } from "lucide-react";
 import "./App.css";
 import "./components.css";
 import logo from "./assets/logo.png";
