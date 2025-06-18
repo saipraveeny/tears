@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
-import heroWild from "../assets/hero_wild.jpg";
-import heroGlitch from "../assets/hero_glitch.jpg";
-import heroCohc from "../assets/hero_cohc.jpg";
+import heroWild from "../assets/hero_wild.png";
+import heroGlitch from "../assets/hero_glitch.png";
+import heroCohc from "../assets/hero_cohc.png";
 
 const heroImages = [
   { src: heroWild, alt: "Wild Variant" },
