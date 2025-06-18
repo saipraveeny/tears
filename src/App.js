@@ -16,6 +16,10 @@ import {
 import "./App.css";
 import "./components.css";
 import logo from "./assets/logo.png";
+// Import product images for confirmation modal
+import wildImg from "./assets/wild.jpg";
+import glitchImg from "./assets/glitch.jpg";
+import cohcImg from "./assets/cohc.jpg";
 
 // Components
 import Hero from "./components/Hero";
@@ -195,107 +199,39 @@ function App() {
   );
 
   // Confirmation Modal
-  const ConfirmationModal = () => (
-    <motion.div
-      className="confirmation-modal"
-      style={{ display: confirmationModal.isOpen ? "flex" : "none" }}
-      initial={false}
-      animate={confirmationModal.isOpen ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      onClick={() =>
-        setConfirmationModal({ isOpen: false, product: null, quantity: 1 })
-      }
-    >
+  const ConfirmationModal = () => {
+    // Determine the image to show based on product name
+    let productImg = null;
+    if (confirmationModal.product) {
+      if (confirmationModal.product.name === "Wild") productImg = wildImg;
+      else if (confirmationModal.product.name === "Glitch")
+        productImg = glitchImg;
+      else if (confirmationModal.product.name === "COHC") productImg = cohcImg;
+    }
+    return (
       <motion.div
-        className="confirmation-content glass-strong"
+        className="confirmation-modal"
+        style={{ display: confirmationModal.isOpen ? "flex" : "none" }}
         initial={false}
-        animate={
-          confirmationModal.isOpen
-            ? { scale: 1, opacity: 1 }
-            : { scale: 0.95, opacity: 0 }
-        }
+        animate={confirmationModal.isOpen ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.2 }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={() =>
+          setConfirmationModal({ isOpen: false, product: null, quantity: 1 })
+        }
       >
-        <button
-          className="modal-close"
-          onClick={() =>
-            setConfirmationModal({ isOpen: false, product: null, quantity: 1 })
+        <motion.div
+          className="confirmation-content glass-strong"
+          initial={false}
+          animate={
+            confirmationModal.isOpen
+              ? { scale: 1, opacity: 1 }
+              : { scale: 0.95, opacity: 0 }
           }
+          transition={{ duration: 0.2 }}
+          onClick={(e) => e.stopPropagation()}
         >
-          ×
-        </button>
-        <h2 className="confirmation-title">Add to Cart</h2>
-
-        <div className="confirmation-product">
-          <div className="confirmation-product-info">
-            <h3 className="confirmation-product-name">
-              {confirmationModal.product?.name}
-            </h3>
-            <p className="confirmation-product-description">
-              {confirmationModal.product?.description}
-            </p>
-            <div className="confirmation-product-price">
-              {confirmationModal.product?.price}
-            </div>
-          </div>
-
-          <div className="confirmation-quantity">
-            <label className="quantity-label">Quantity:</label>
-            <div className="quantity-controls">
-              <motion.button
-                className="quantity-btn"
-                onClick={() =>
-                  updateConfirmationQuantity(confirmationModal.quantity - 1)
-                }
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Minus size={16} />
-              </motion.button>
-              <span className="quantity-display">
-                {confirmationModal.quantity}
-              </span>
-              <motion.button
-                className="quantity-btn"
-                onClick={() =>
-                  updateConfirmationQuantity(confirmationModal.quantity + 1)
-                }
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Plus size={16} />
-              </motion.button>
-            </div>
-          </div>
-
-          <div className="confirmation-total">
-            <span>Total: </span>
-            <span className="total-price">
-              {confirmationModal.product &&
-                (
-                  parseFloat(confirmationModal.product.price.replace("$", "")) *
-                  confirmationModal.quantity
-                ).toLocaleString(undefined, {
-                  style: "currency",
-                  currency: "USD",
-                })}
-            </span>
-          </div>
-        </div>
-
-        <div className="confirmation-actions">
-          <motion.button
-            className="btn btn-primary"
-            onClick={confirmAddToCart}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ShoppingCart size={16} />
-            Add to Cart
-          </motion.button>
-          <motion.button
-            className="btn btn-secondary"
+          <button
+            className="modal-close"
             onClick={() =>
               setConfirmationModal({
                 isOpen: false,
@@ -303,15 +239,109 @@ function App() {
                 quantity: 1,
               })
             }
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            Cancel
-          </motion.button>
-        </div>
+            ×
+          </button>
+          <h2 className="confirmation-title">Add to Cart</h2>
+
+          {/* Product image */}
+          {productImg && (
+            <div className="confirmation-image-wrapper">
+              <img
+                src={productImg}
+                alt={confirmationModal.product?.name}
+                className="confirmation-product-image"
+              />
+            </div>
+          )}
+
+          <div className="confirmation-product">
+            <div className="confirmation-product-info">
+              <h3 className="confirmation-product-name">
+                {confirmationModal.product?.name}
+              </h3>
+              <p className="confirmation-product-description">
+                {confirmationModal.product?.description}
+              </p>
+              <div className="confirmation-product-price">
+                {confirmationModal.product?.price}
+              </div>
+            </div>
+
+            <div className="confirmation-quantity">
+              <label className="quantity-label">Quantity:</label>
+              <div className="quantity-controls">
+                <motion.button
+                  className="quantity-btn"
+                  onClick={() =>
+                    updateConfirmationQuantity(confirmationModal.quantity - 1)
+                  }
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Minus size={16} />
+                </motion.button>
+                <span className="quantity-display">
+                  {confirmationModal.quantity}
+                </span>
+                <motion.button
+                  className="quantity-btn"
+                  onClick={() =>
+                    updateConfirmationQuantity(confirmationModal.quantity + 1)
+                  }
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Plus size={16} />
+                </motion.button>
+              </div>
+            </div>
+
+            <div className="confirmation-total">
+              <span>Total: </span>
+              <span className="total-price">
+                {confirmationModal.product &&
+                  (
+                    parseFloat(
+                      confirmationModal.product.price.replace("$", "")
+                    ) * confirmationModal.quantity
+                  ).toLocaleString(undefined, {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+              </span>
+            </div>
+          </div>
+
+          <div className="confirmation-actions">
+            <motion.button
+              className="btn btn-primary"
+              onClick={confirmAddToCart}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ShoppingCart size={16} />
+              Add to Cart
+            </motion.button>
+            <motion.button
+              className="btn btn-secondary"
+              onClick={() =>
+                setConfirmationModal({
+                  isOpen: false,
+                  product: null,
+                  quantity: 1,
+                })
+              }
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Cancel
+            </motion.button>
+          </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
-  );
+    );
+  };
 
   return (
     <div className="App">

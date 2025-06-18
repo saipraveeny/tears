@@ -1,8 +1,26 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import heroWild from "../assets/hero_wild.jpg";
+import heroGlitch from "../assets/hero_glitch.jpg";
+import heroCohc from "../assets/hero_cohc.jpg";
+
+const heroImages = [
+  { src: heroWild, alt: "Wild Variant" },
+  { src: heroGlitch, alt: "Glitch Variant" },
+  { src: heroCohc, alt: "COHC Variant" },
+];
 
 const Hero = ({ logo }) => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroImages.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="home" className="hero">
       <div className="hero-background">
@@ -30,7 +48,7 @@ const Hero = ({ logo }) => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container" style={{ position: "relative" }}>
         <div className="hero-content">
           <motion.div
             className="hero-text"
@@ -122,35 +140,23 @@ const Hero = ({ logo }) => {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            className="hero-visual"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="hero-bottle">
-              <motion.div
-                className="bottle-glow"
-                animate={{
-                  boxShadow: [
-                    "0 0 20px rgba(255, 59, 48, 0.3)",
-                    "0 0 40px rgba(255, 59, 48, 0.6)",
-                    "0 0 20px rgba(255, 59, 48, 0.3)",
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <div className="bottle-shape">
-                <div className="bottle-neck"></div>
-                <div className="bottle-body">
-                  <div className="bottle-label">
-                    <span className="label-text">TEARS</span>
-                    <span className="label-subtext">WILD</span>
-                  </div>
-                </div>
-              </div>
+          {/* Large, right-side, gradient-masked hero image */}
+          <div className="hero-visual-side">
+            <div className="hero-variant-slider">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={heroImages[current].src}
+                  src={heroImages[current].src}
+                  alt={heroImages[current].alt}
+                  className="hero-variant-image"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.7 }}
+                />
+              </AnimatePresence>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -3,6 +3,16 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Flame, Star, ShoppingCart, Eye } from "lucide-react";
 
+// Import variant images
+import wildImage from "../assets/wild.png";
+import glitchImage from "../assets/glitch.png";
+import cohcImage from "../assets/cohc.png";
+
+// Import modal images
+import wildJpg from "../assets/wild.jpg";
+import glitchJpg from "../assets/glitch.jpg";
+import cohcJpg from "../assets/cohc.jpg";
+
 const Products = ({ addToCart, openCart, showConfirmationModal }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -21,7 +31,7 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
       price: "$24.99",
       color: "#ff3b30",
       features: ["Extra Hot", "Herb Infused", "Smoky Finish"],
-      image: "wild-sauce",
+      image: wildImage,
     },
     {
       id: 2,
@@ -31,7 +41,7 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
       price: "$29.99",
       color: "#ff6b61",
       features: ["Reaper Blend", "Exotic Spices", "Complex Heat"],
-      image: "glitch-sauce",
+      image: glitchImage,
     },
     {
       id: 3,
@@ -42,7 +52,7 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
       price: "$19.99",
       color: "#ff8a80",
       features: ["Citrus Notes", "Balanced Heat", "Versatile"],
-      image: "cohc-sauce",
+      image: cohcImage,
     },
   ];
 
@@ -112,21 +122,15 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
               }}
               onClick={() => setSelectedProduct(product)}
             >
-              <div className="product-image">
-                <div
-                  className="product-bottle"
-                  style={{ "--bottle-color": product.color }}
-                >
-                  <div className="bottle-shape">
-                    <div className="bottle-neck"></div>
-                    <div className="bottle-body">
-                      <div className="bottle-label">
-                        <span className="label-text">TEARS</span>
-                        <span className="label-subtext">{product.name}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div
+                className="product-image"
+                style={{ background: product.color, borderRadius: "2rem" }}
+              >
+                <img
+                  src={product.image}
+                  alt={`${product.name} Hot Sauce`}
+                  className="product-variant-image"
+                />
                 <motion.div
                   className="product-overlay"
                   initial={{ opacity: 0 }}
@@ -230,24 +234,29 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
             >
               ×
             </button>
-            <div className="modal-product">
-              <div className="modal-image">
-                <div
-                  className="modal-bottle"
-                  style={{ "--bottle-color": selectedProduct.color }}
-                >
-                  <div className="bottle-shape">
-                    <div className="bottle-neck"></div>
-                    <div className="bottle-body">
-                      <div className="bottle-label">
-                        <span className="label-text">TEARS</span>
-                        <span className="label-subtext">
-                          {selectedProduct.name}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="modal-product modal-product-grid">
+              <div className="modal-image modal-image-fill">
+                {selectedProduct.name === "Wild" && (
+                  <img
+                    src={wildJpg}
+                    alt="Wild Hot Sauce"
+                    className="modal-variant-image modal-variant-image-fill"
+                  />
+                )}
+                {selectedProduct.name === "Glitch" && (
+                  <img
+                    src={glitchJpg}
+                    alt="Glitch Hot Sauce"
+                    className="modal-variant-image modal-variant-image-fill"
+                  />
+                )}
+                {selectedProduct.name === "COHC" && (
+                  <img
+                    src={cohcJpg}
+                    alt="COHC Hot Sauce"
+                    className="modal-variant-image modal-variant-image-fill"
+                  />
+                )}
               </div>
               <div className="modal-details">
                 <h2>{selectedProduct.name}</h2>
@@ -270,7 +279,7 @@ const Products = ({ addToCart, openCart, showConfirmationModal }) => {
                   className="btn btn-primary"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => addToCart(selectedProduct)}
+                  onClick={() => showConfirmationModal(selectedProduct)}
                 >
                   <ShoppingCart size={16} />
                   Add to Cart
