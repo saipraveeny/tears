@@ -4,6 +4,7 @@ import { ShoppingCart, Plus, Minus } from "lucide-react";
 import "./App.css";
 import "./components.css";
 import logo from "./assets/logo.png";
+import Loader from "./components/Loader";
 // Import product images for confirmation modal
 import wildImg from "./assets/wild.jpg";
 import glitchImg from "./assets/glitch.jpg";
@@ -28,11 +29,16 @@ function App() {
     product: null,
     quantity: 1,
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   const navItems = [
@@ -345,6 +351,8 @@ function App() {
       </motion.div>
     );
   };
+
+  if (loading) return <Loader />;
 
   return (
     <div className="App">
