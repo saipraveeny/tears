@@ -991,12 +991,12 @@
 @media (max-width: 1024px) {
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
     text-align: center;
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 
   .contact-content {
@@ -1005,14 +1005,20 @@
   }
 
   .footer-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
   }
 }
 
 @media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .hero-subtitle {
@@ -1029,21 +1035,21 @@
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .products-grid,
-  .testimonials-grid {
+  .benefits-grid {
     grid-template-columns: 1fr;
   }
 
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .footer-links {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .footer-bottom-content {
@@ -1053,12 +1059,12 @@
   }
 
   .footer-legal {
-    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .modal-product-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 
   .modal-content {
@@ -1066,19 +1072,23 @@
   }
 
   .product-variant-image {
-    max-width: 150px;
-    max-height: 200px;
+    height: 120px;
   }
 
   .modal-variant-image {
-    max-width: 200px;
-    max-height: 250px;
+    height: 180px;
   }
 }
 
 @media (max-width: 480px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .hero-bottle {
@@ -1093,12 +1103,11 @@
 
   .bottle-neck {
     width: 30px;
-    height: 40px;
+    height: 45px;
   }
 
   .feature-card,
-  .benefit-card,
-  .testimonial-card {
+  .benefit-card {
     padding: 1.5rem;
   }
 
@@ -1254,6 +1263,7 @@
 }
 
 .hero-visual-side {
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1304,13 +1314,21 @@
 
 @media (max-width: 900px) {
   .hero-visual-side {
-    width: 40vw;
-    min-width: 120px;
-    max-width: 320px;
+    position: relative;
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+    height: 300px;
+    margin-top: 2rem;
   }
   .hero-variant-slider {
-    height: 35vw;
-    max-height: 220px;
+    height: 100%;
+    max-height: none;
+  }
+  .hero-variant-image {
+    -webkit-mask-image: none;
+    mask-image: none;
+    object-fit: contain;
   }
   .product-image {
     height: 140px;
@@ -1319,13 +1337,11 @@
 
 @media (max-width: 600px) {
   .hero-visual-side {
-    width: 60vw;
-    min-width: 80px;
-    max-width: 160px;
+    height: 200px;
+    margin-top: 1.5rem;
   }
   .hero-variant-slider {
-    height: 30vw;
-    max-height: 120px;
+    height: 100%;
   }
 }
 
