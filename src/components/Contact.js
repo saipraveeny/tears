@@ -10,6 +10,9 @@ const Contact = () => {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -17,29 +20,88 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+
+    // Basic validation
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
+      setSubmitStatus("error");
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus("error");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Using FormSubmit.io - free service that sends form data via email
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("company", formData.company || "Not specified");
+      formDataToSend.append("message", formData.message);
+      formDataToSend.append(
+        "_subject",
+        `New Contact Form Submission from ${formData.name}`
+      );
+      formDataToSend.append("_replyto", formData.email);
+      formDataToSend.append("_next", window.location.href);
+
+      // Send to FormSubmit.io which will forward to tearshxd@gmail.com
+      const response = await fetch("https://formsubmit.co/tearshxd@gmail.com", {
+        method: "POST",
+        body: formDataToSend,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          message: "",
+        });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: <Mail className="contact-icon" />,
       title: "Email",
-      value: "hello@tears.com",
-      link: "mailto:hello@tears.com",
+      value: "tearshxd@gmail.com",
+      link: "mailto:tearshxd@gmail.com",
     },
     {
       icon: <Phone className="contact-icon" />,
       title: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+91 8897452072",
       link: "tel:+15551234567",
     },
     {
       icon: <MapPin className="contact-icon" />,
       title: "Address",
-      value: "123 Spice Street, Culinary District, NY 10001",
+      value: "Hyderabad, Telangana, India",
       link: "#",
     },
   ];
@@ -92,13 +154,6 @@ const Contact = () => {
                   </div>
                 </motion.a>
               ))}
-            </div>
-
-            <div className="business-hours">
-              <h4>Business Hours</h4>
-              <p>Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-              <p>Saturday: 10:00 AM - 4:00 PM EST</p>
-              <p>Sunday: Closed</p>
             </div>
           </motion.div>
 
@@ -161,14 +216,60 @@ const Contact = () => {
                 />
               </div>
 
+              {/* Status Messages */}
+              {submitStatus === "success" && (
+                <motion.div
+                  className="form-success"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)",
+                    color: "white",
+                    padding: "1rem",
+                    borderRadius: "var(--border-radius)",
+                    marginBottom: "1rem",
+                    textAlign: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  ✅ Message sent successfully! We'll get back to you soon.
+                </motion.div>
+              )}
+
+              {submitStatus === "error" && (
+                <motion.div
+                  className="form-error"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+                    color: "white",
+                    padding: "1rem",
+                    borderRadius: "var(--border-radius)",
+                    marginBottom: "1rem",
+                    textAlign: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  ❌ Please fill in all required fields with valid information.
+                </motion.div>
+              )}
+
               <motion.button
                 type="submit"
                 className="btn btn-primary submit-btn"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                disabled={isSubmitting}
+                whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                style={{
+                  opacity: isSubmitting ? 0.7 : 1,
+                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                }}
               >
                 <Send size={20} />
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </motion.button>
             </form>
           </motion.div>

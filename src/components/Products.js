@@ -6,12 +6,12 @@ import { Flame, Star, ShoppingCart, Eye } from "lucide-react";
 // Import variant images
 import wildImage from "../assets/wild.png";
 import glitchImage from "../assets/glitch.png";
-import cohcImage from "../assets/cohc.png";
+import greenImage from "../assets/green.png";
 
 // Import modal images
 import wildJpg from "../assets/wild.jpg";
 import glitchJpg from "../assets/glitch.jpg";
-import cohcJpg from "../assets/cohc.jpg";
+import greenJpg from "../assets/green.png";
 
 const Products = ({
   addToCart,
@@ -29,35 +29,38 @@ const Products = ({
   const products = [
     {
       id: 1,
-      name: "Wild",
+      name: "Green",
       description:
-        "A bold blend of habanero and ghost peppers with aromatic herbs",
-      heatLevel: 5,
-      price: "₹60.00",
-      color: "#ff3b30",
-      features: ["Extra Hot", "Herb Infused", "Smoky Finish"],
-      image: wildImage,
+        "Classic habanero with citrus undertones and perfect balance",
+      heatLevel: 2,
+      price: "₹250.00",
+      color: "#548c50",
+      features: ["Green chilli", "Lemon", "Balanced Heat", "Versatile"],
+      image: greenImage,
+      available: true,
     },
     {
       id: 2,
-      name: "Glitch",
-      description: "Innovative fusion of Carolina Reaper and exotic spices",
+      name: "Wild (Launching soon)",
+      description:
+        "A bold blend of habanero and ghost peppers with aromatic herbs",
       heatLevel: 4,
-      price: "₹60.00",
-      color: "#0f222b",
-      features: ["Reaper Blend", "Exotic Spices", "Complex Heat"],
-      image: glitchImage,
+      price: "Ignite Your Taste Buds Soon",
+      color: "#ff3b30",
+      features: ["Extra Hot", "Herb Infused", "Smoky Finish"],
+      image: wildImage,
+      available: false,
     },
     {
       id: 3,
-      name: "COHC",
-      description:
-        "Classic habanero with citrus undertones and perfect balance",
+      name: "Glitch (Launching soon)",
+      description: "Innovative fusion of Carolina Reaper and exotic spices",
       heatLevel: 3,
-      price: "₹60.00",
-      color: "#ffe3e2",
-      features: ["Citrus Notes", "Balanced Heat", "Versatile"],
-      image: cohcImage,
+      price: "Digital Heat Revolution",
+      color: "#0f222b",
+      features: ["Reaper Blend", "Exotic Spices", "Complex Heat"],
+      image: glitchImage,
+      available: false,
     },
   ];
 
@@ -140,10 +143,12 @@ const Products = ({
               <div className="product-content">
                 <div className="product-header">
                   <h3 className="product-name">{product.name}</h3>
-                  <div className="product-rating">
-                    <Star size={16} className="star-icon" />
-                    <span>4.9</span>
-                  </div>
+                  {product.available && (
+                    <div className="product-rating">
+                      <Star size={16} className="star-icon" />
+                      <span>4.9</span>
+                    </div>
+                  )}
                 </div>
 
                 <p className="product-description">{product.description}</p>
@@ -165,18 +170,24 @@ const Products = ({
 
                 <div className="product-footer">
                   <span className="product-price">{product.price}</span>
-                  <motion.button
-                    className="btn btn-primary add-to-cart"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      showConfirmationModal(product);
-                    }}
-                  >
-                    <ShoppingCart size={16} />
-                    Add to Cart
-                  </motion.button>
+                  {product.available ? (
+                    <motion.button
+                      className="btn btn-primary add-to-cart"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        showConfirmationModal(product);
+                      }}
+                    >
+                      <ShoppingCart size={16} />
+                      Add to Cart
+                    </motion.button>
+                  ) : (
+                    <div className="coming-soon-badge">
+                      <span>Launching soon</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -192,17 +203,11 @@ const Products = ({
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <div className="great-deal-content">
-            <div className="great-deal-title">Great Deal</div>
+            <div className="great-deal-title">Launching Offer</div>
             <div className="great-deal-desc">
-              <b>All 3 Variants + Tube</b> for just{" "}
-              <span className="great-deal-price">₹160.00</span>
+              <b>3 bottles of green</b> for just{" "}
+              <span className="great-deal-price">₹650.00</span>
             </div>
-            <button
-              className="btn btn-primary great-deal-btn"
-              onClick={addBundleToCart}
-            >
-              Buy Bundle
-            </button>
           </div>
         </motion.div>
 
@@ -250,24 +255,24 @@ const Products = ({
             </button>
             <div className="modal-product modal-product-grid">
               <div className="modal-image modal-image-fill">
-                {selectedProduct.name === "Wild" && (
+                {selectedProduct.name === "Wild (Launching soon)" && (
                   <img
                     src={wildJpg}
                     alt="Wild Hot Sauce"
                     className="modal-variant-image modal-variant-image-fill"
                   />
                 )}
-                {selectedProduct.name === "Glitch" && (
+                {selectedProduct.name === "Glitch (Launching soon)" && (
                   <img
                     src={glitchJpg}
                     alt="Glitch Hot Sauce"
                     className="modal-variant-image modal-variant-image-fill"
                   />
                 )}
-                {selectedProduct.name === "COHC" && (
+                {selectedProduct.name === "Green" && (
                   <img
-                    src={cohcJpg}
-                    alt="COHC Hot Sauce"
+                    src={greenJpg}
+                    alt="Green Hot Sauce"
                     className="modal-variant-image modal-variant-image-fill"
                   />
                 )}
@@ -289,15 +294,21 @@ const Products = ({
                   ))}
                 </div>
                 <div className="modal-price">{selectedProduct.price}</div>
-                <motion.button
-                  className="btn btn-primary"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => showConfirmationModal(selectedProduct)}
-                >
-                  <ShoppingCart size={16} />
-                  Add to Cart
-                </motion.button>
+                {selectedProduct.available ? (
+                  <motion.button
+                    className="btn btn-primary"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => showConfirmationModal(selectedProduct)}
+                  >
+                    <ShoppingCart size={16} />
+                    Add to Cart
+                  </motion.button>
+                ) : (
+                  <div className="modal-coming-soon">
+                    <span>Launching soon - Stay Tuned!</span>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

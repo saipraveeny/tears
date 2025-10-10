@@ -4,11 +4,12 @@ import { ShoppingCart, Plus, Minus } from "lucide-react";
 import "./App.css";
 import "./components.css";
 import logo from "./assets/logo.png";
+import triangle from "./assets/triangle.png";
 import Loader from "./components/Loader";
 // Import product images for confirmation modal
 import wildImg from "./assets/wild.jpg";
 import glitchImg from "./assets/glitch.jpg";
-import cohcImg from "./assets/cohc.jpg";
+import greenImg from "./assets/green.png";
 
 // Components
 import Hero from "./components/Hero";
@@ -210,10 +211,12 @@ function App() {
     // Determine the image to show based on product name
     let productImg = null;
     if (confirmationModal.product) {
-      if (confirmationModal.product.name === "Wild") productImg = wildImg;
-      else if (confirmationModal.product.name === "Glitch")
+      if (confirmationModal.product.name === "Wild (Launching soon)")
+        productImg = wildImg;
+      else if (confirmationModal.product.name === "Glitch (Launching soon)")
         productImg = glitchImg;
-      else if (confirmationModal.product.name === "COHC") productImg = cohcImg;
+      else if (confirmationModal.product.name === "Green")
+        productImg = greenImg;
     }
     return (
       <motion.div
@@ -487,15 +490,15 @@ function App() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <span
+            <img
+              src={triangle}
+              alt="Scroll to top"
               style={{
-                fontSize: 24,
-                display: "block",
+                width: "24px",
+                height: "24px",
                 transform: "rotate(180deg)",
               }}
-            >
-              &#8964;
-            </span>
+            />
           </motion.button>
         )}
       </AnimatePresence>

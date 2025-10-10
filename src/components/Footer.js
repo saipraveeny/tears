@@ -1,15 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
+import LegalModals from "./LegalModals";
 
 const Footer = ({ logo }) => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     products: [
-      { name: "Wild", href: "#products" },
-      { name: "Glitch", href: "#products" },
-      { name: "COHC", href: "#products" },
+      { name: "Wild (Launching soon)", href: "#products" },
+      { name: "Glitch (Launching soon)", href: "#products" },
+      { name: "Green", href: "#products" },
     ],
     company: [
       { name: "About Us", href: "#about" },
@@ -123,8 +124,7 @@ const Footer = ({ logo }) => {
           <div className="footer-bottom-content">
             <p>&copy; {currentYear} Tears. All rights reserved.</p>
             <div className="footer-legal">
-              <a href="#privacy">Privacy Policy</a>
-              <a href="#terms">Terms of Service</a>
+              <LegalModals />
             </div>
           </div>
         </motion.div>

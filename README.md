@@ -85,7 +85,7 @@ src/
 
 ### Products
 
-- Three variants: Wild, Glitch, COHC
+- Three variants: Wild (🔥 Ignite Your Taste Buds Soon), Glitch (⚡ Digital Heat Revolution), Green (₹250)
 - Heat level indicators
 - Product modals with detailed information
 - Add to cart functionality
@@ -209,8 +209,8 @@ This project is licensed under the MIT License.
 
 For support or questions, please contact:
 
-- Email: hello@tears.com
-- Phone: +1 (555) 123-4567
+- Email: tearshxd@gmail.com
+- Phone: +91 8897452072
 
 ---
 

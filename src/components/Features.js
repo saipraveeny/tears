@@ -121,6 +121,12 @@ const Features = () => {
             className="btn btn-primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const productsSection = document.getElementById("products");
+              if (productsSection) {
+                productsSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
           >
             Discover Our Variants
           </motion.button>

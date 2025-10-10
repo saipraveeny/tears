@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import heroWild from "../assets/hero_wild.png";
 import heroGlitch from "../assets/hero_glitch.png";
-import heroCohc from "../assets/hero_cohc.png";
+import heroGreen from "../assets/green.png";
 
 const heroImages = [
-  { src: heroWild, alt: "Wild Variant" },
-  { src: heroGlitch, alt: "Glitch Variant" },
-  { src: heroCohc, alt: "COHC Variant" },
+  { src: heroWild, alt: "Wild Variant (Launching soon)" },
+  { src: heroGlitch, alt: "Glitch Variant (Launching soon)" },
+  { src: heroGreen, alt: "Green Variant" },
 ];
 
 const Hero = ({ logo }) => {
@@ -89,9 +89,10 @@ const Hero = ({ logo }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              Discover the premium hot sauce brand revolutionizing the food
-              industry with artisanal, health-conscious sauces. Zero fat, zero
-              preservatives, zero water.
+              We are a natural hot sauce brand dedicated to delivering bold,
+              authentic flavors through the traditional art of
+              lacto-fermentation. Our mission is to craft clean, premium sauces
+              that celebrate seasonality, sustainability, and purity.
             </motion.p>
 
             <motion.div
@@ -104,6 +105,12 @@ const Hero = ({ logo }) => {
                 className="btn btn-primary hero-btn"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  const productsSection = document.getElementById("products");
+                  if (productsSection) {
+                    productsSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
               >
                 Explore Products
                 <ArrowRight size={20} />
