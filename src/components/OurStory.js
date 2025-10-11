@@ -7,12 +7,12 @@ const OurStory = () => {
     {
       name: "Malladi Sruthvik",
       role: "Co-Founder & Chef",
-      bio: "A culinary professional with a Master's degree from Birmingham University, UK, who honed his craft in several Michelin-starred restaurants, where precision and creativity guided his understanding of flavor balance.",
+      bio: "a culinary professional with a Master’s degree from Birmingham University, UK, refined his skills in the high-pressure kitchens of Michelin-starred restaurants, where every detail mattered from the sharpness of the knife to the subtlety of heat. His global exposure shaped a philosophy rooted in balance, integrity, and respect for ingredients, inspiring him to bring fine-dining techniques into everyday flavors.",
     },
     {
       name: "Yadavalli Pavan Prasanth",
       role: "Co-Founder & Chef",
-      bio: "Brings a deep-rooted passion for regional flavors, having worked across Hyderabad's vibrant culinary scene and the Andaman & Nicobar Islands, exploring the natural spice profiles of coastal and tropical ingredients.",
+      bio: "on the other hand, found his inspiration closer to home through India’s diverse food cultures and his experiences working across Hyderabad’s dynamic culinary scene and the Andaman & Nicobar Islands. His deep understanding of local produce, spice behavior, and traditional cooking techniques adds an earthy authenticity to the brand’s flavor identity.",
     },
   ];
 
@@ -59,10 +59,11 @@ const OurStory = () => {
           </div>
 
           <p className="chefs-footer">
-            Together, as graduates of IHM Shri Shakti, they carry forward the
-            spirit of culinary curiosity and discipline that shaped their
-            beginnings—transforming experience and friendship into a brand that
-            speaks through taste.
+            Together, they blend precision and passion Sruthvik’s technical
+            finesse with Pavan’s grounded approach creating a brand that doesn’t
+            just make sauces, but crafts experiences. Their shared foundation at
+            IHM Shri Shakti continues to guide them, reminding them that true
+            flavor isn’t manufactured it’s cultivated, nurtured, and earned.
           </p>
         </motion.section>
 
@@ -74,16 +75,28 @@ const OurStory = () => {
         >
           <h2>Beyond the Bottle</h2>
           <p>
-            TEARS sauces aren't just for dipping or drizzling—they're versatile
-            companions for stir-fries, marinades, coatings, and grills. Each
-            variant is designed to elevate every style of cooking—from home
-            kitchens to professional tables.
+            TEARS is more than a condiment it’s a culinary companion designed to
+            elevate every kind of dish and every kind of cook. Whether it’s a
+            home kitchen experiment or a professional chef’s plating, our sauces
+            adapt effortlessly, enhancing flavor without overpowering it.
           </p>
           <p>
-            What we create is not just a condiment, but a celebration of nature,
-            craft, and culture. Every batch represents our commitment to purity,
-            passion, and seasonal expression—because flavor, like emotion,
-            deserves to be felt deeply.
+            Each variant is carefully developed to serve multiple purposes as a
+            drizzle, dip, stir-fry base, marinade, or coating embodying
+            versatility in every sense. From smoky notes to tangy bursts and
+            umami depth, every sauce tells its own story through texture and
+            aroma. Our process doesn’t end with flavor, it begins with purpose.
+            By using local produce, seasonal fruits, and traditional methods
+            like lacto-fermentation and steaming, we ensure that every bottle of
+            TEARS is alive with character a living expression of the ingredients
+            and the land they come from.
+          </p>
+          <p>
+            Every bottle is a limited batch, made with intent and attention, not
+            mass production. We believe that flavor should move people that it
+            should have emotion, memory, and depth. That’s what TEARS represents
+            a feeling, a craft, and a connection between nature,
+            heat, and heart.
           </p>
         </motion.section>
       </div>
