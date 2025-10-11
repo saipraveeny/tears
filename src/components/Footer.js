@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
+import { Instagram } from "lucide-react";
 import LegalModals from "./LegalModals";
 import FAQ from "./FAQ";
 

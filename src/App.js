@@ -35,17 +35,17 @@ function App() {
   });
   const [loading, setLoading] = useState(true);
   
-  // Main app component for the home page
-  const MainApp = () => (
-    <>
-      <Hero />
-      <Features />
-      <Products />
-      <Benefits />
-      <Testimonials />
-      <Contact />
-    </>
-  );
+  // // Main app component for the home page
+  // const MainApp = () => (
+  //   <>
+  //     <Hero />
+  //     <Features />
+  //     <Products />
+  //     <Benefits />
+  //     <Testimonials />
+  //     <Contact />
+  //   </>
+  // );
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);

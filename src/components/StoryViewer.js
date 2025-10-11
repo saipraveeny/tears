@@ -1,57 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
-import '../components/StoryViewer.css';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import "../components/StoryViewer.css";
 
 // Import media assets
-import video1 from '../assets/videos/LAUNCHING SOON.mp4';
-import image1 from '../assets/images/1.jpg';
-import image2 from '../assets/images/2.jpg';
-import image3 from '../assets/images/3.jpg';
-import image4 from '../assets/images/4.jpg';
+// @ts-ignore
+import video1 from "../assets/videos/LAUNCHING SOON.mp4";
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
 
 const StoryViewer = ({ onClose }) => {
   const isOpen = true; // Component is only rendered when open
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  
+
   // Media items array (video first, then images)
   const mediaItems = [
-    { type: 'video', src: video1, duration: 30 },
-    { type: 'image', src: image1, duration: 5 },
-    { type: 'image', src: image2, duration: 5 },
-    { type: 'image', src: image3, duration: 5 },
-    { type: 'image', src: image4, duration: 5 },
+    { type: "video", src: video1, duration: 30 },
+    { type: "image", src: image1, duration: 5 },
+    { type: "image", src: image2, duration: 5 },
+    { type: "image", src: image3, duration: 5 },
+    { type: "image", src: image4, duration: 5 },
   ];
 
   // Handle automatic progression
   useEffect(() => {
     if (!isOpen || !isPlaying) return;
-    
+
     let timer;
     const currentItem = mediaItems[currentIndex];
     const duration = currentItem.duration * 1000;
     let startTime = Date.now();
-    
+
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
-      const newProgress = Math.min(elapsed / duration * 100, 100);
+      const newProgress = Math.min((elapsed / duration) * 100, 100);
       setProgress(newProgress);
-      
+
       if (newProgress < 100) {
         requestAnimationFrame(updateProgress);
       } else {
         handleNext();
       }
     };
-    
+
     requestAnimationFrame(updateProgress);
-    
+
     return () => {
       cancelAnimationFrame(timer);
     };
-  }, [currentIndex, isOpen, isPlaying]);
+    // @ts-ignore
+    // eslint-disable-next-line no-use-before-define
+  }, [currentIndex, isOpen, isPlaying, mediaItems]);
 
   // Reset progress when changing items
   useEffect(() => {
@@ -81,16 +85,21 @@ const StoryViewer = ({ onClose }) => {
     return (
       <div className="story-progress-container">
         {mediaItems.map((_, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="story-progress-bar-bg"
             onClick={() => setCurrentIndex(index)}
           >
-            <motion.div 
-              className="story-progress-bar-fill" 
+            <motion.div
+              className="story-progress-bar-fill"
               initial={{ width: 0 }}
-              animate={{ 
-                width: index === currentIndex ? `${progress}%` : index < currentIndex ? '100%' : '0%' 
+              animate={{
+                width:
+                  index === currentIndex
+                    ? `${progress}%`
+                    : index < currentIndex
+                    ? "100%"
+                    : "0%",
               }}
               transition={{ ease: "linear" }}
             />
@@ -103,18 +112,18 @@ const StoryViewer = ({ onClose }) => {
   // Render current media item
   const renderMedia = () => {
     const currentItem = mediaItems[currentIndex];
-    
-    if (currentItem.type === 'video') {
+
+    if (currentItem.type === "video") {
       return (
-        <video 
-          src={currentItem.src} 
+        <video
+          src={currentItem.src}
           className="story-media"
           autoPlay={isPlaying}
           loop={false}
           muted={false}
           controls={false}
           playsInline
-          ref={el => {
+          ref={(el) => {
             if (el) {
               if (isPlaying) {
                 el.play();
@@ -127,10 +136,10 @@ const StoryViewer = ({ onClose }) => {
       );
     } else {
       return (
-        <img 
-          src={currentItem.src} 
-          className="story-media" 
-          alt={`Story ${currentIndex + 1}`} 
+        <img
+          src={currentItem.src}
+          className="story-media"
+          alt={`Story ${currentIndex + 1}`}
         />
       );
     }
@@ -139,13 +148,13 @@ const StoryViewer = ({ onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           className="story-viewer-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.div 
+          <motion.div
             className="story-viewer-container"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -156,32 +165,32 @@ const StoryViewer = ({ onClose }) => {
             <button className="story-close-btn" onClick={onClose}>
               <X size={24} />
             </button>
-            
+
             {/* Progress bars */}
             {renderProgressBars()}
-            
+
             {/* Media content */}
             <div className="story-content">
               {renderMedia()}
-              
+
               {/* Navigation controls */}
               <div className="story-controls">
-                <button 
+                <button
                   className="story-nav-btn story-prev-btn"
                   onClick={handlePrev}
                   disabled={currentIndex === 0}
                 >
                   <ChevronLeft size={40} />
                 </button>
-                
-                <button 
+
+                <button
                   className="story-play-pause-btn"
                   onClick={togglePlayPause}
                 >
                   {isPlaying ? <Pause size={24} /> : <Play size={24} />}
                 </button>
-                
-                <button 
+
+                <button
                   className="story-nav-btn story-next-btn"
                   onClick={handleNext}
                 >
