@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, Plus, Minus } from "lucide-react";
 import "./App.css";
@@ -19,6 +20,8 @@ import Benefits from "./components/Benefits";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
+import OurStory from "./components/OurStory";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +34,18 @@ function App() {
     quantity: 1,
   });
   const [loading, setLoading] = useState(true);
+  
+  // Main app component for the home page
+  const MainApp = () => (
+    <>
+      <Hero />
+      <Features />
+      <Products />
+      <Benefits />
+      <Testimonials />
+      <Contact />
+    </>
+  );
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -501,21 +516,29 @@ function App() {
       <ConfirmationModal />
 
       {/* Main Content */}
-      <main>
-        <Hero logo={logo} />
-        <Features />
-        <Products
-          addToCart={addToCart}
-          openCart={() => setIsCartOpen(true)}
-          showConfirmationModal={showConfirmationModal}
-          addBundleToCart={bundleProduct}
-        />
-        <Benefits />
-        <Testimonials />
-        <Contact />
-      </main>
-
-      <Footer logo={logo} />
+      <Router>
+        <Routes>
+          <Route path="/" element={
+            <main>
+              <Hero logo={logo} />
+              <Features />
+              <Products
+                addToCart={addToCart}
+                openCart={() => setIsCartOpen(true)}
+                showConfirmationModal={showConfirmationModal}
+                addBundleToCart={bundleProduct}
+              />
+              <Benefits />
+              <Testimonials />
+              <Contact />
+            </main>
+          } />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/our-story" element={<OurStory />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer logo={logo} />
+      </Router>
 
       {/* Scroll to top button */}
       <AnimatePresence>

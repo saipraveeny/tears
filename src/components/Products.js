@@ -30,8 +30,7 @@ const Products = ({
     {
       id: 1,
       name: "Green",
-      description:
-        "Classic habanero with citrus undertones and perfect balance",
+      description: "Classic green chilli with citrus undertones",
       heatLevel: 2,
       price: "₹250.00",
       color: "#548c50",
@@ -42,8 +41,7 @@ const Products = ({
     {
       id: 2,
       name: "Wild (Launching soon)",
-      description:
-        "A bold blend of habanero and ghost peppers with aromatic herbs",
+      description: "A bold blend of red chilli & mustard",
       heatLevel: 4,
       price: "Ignite Your Taste Buds Soon",
       color: "#ff3b30",
@@ -54,11 +52,11 @@ const Products = ({
     {
       id: 3,
       name: "Glitch (Launching soon)",
-      description: "Innovative fusion of Carolina Reaper and exotic spices",
+      description: "Innovative fusion of red chilli and grape fruit",
       heatLevel: 3,
       price: "Digital Heat Revolution",
       color: "#0f222b",
-      features: ["Reaper Blend", "Exotic Spices", "Complex Heat"],
+      features: ["Exotic Spices", "Complex Heat"],
       image: glitchImage,
       available: false,
     },

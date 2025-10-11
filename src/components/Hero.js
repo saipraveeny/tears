@@ -4,6 +4,7 @@ import { ArrowRight, Play } from "lucide-react";
 import heroWild from "../assets/hero_wild.png";
 import heroGlitch from "../assets/hero_glitch.png";
 import heroGreen from "../assets/green.png";
+import StoryViewer from "./StoryViewer";
 
 const heroImages = [
   { src: heroWild, alt: "Wild Variant (Launching soon)" },
@@ -13,6 +14,7 @@ const heroImages = [
 
 const Hero = ({ logo }) => {
   const [current, setCurrent] = useState(0);
+  const [storyViewerOpen, setStoryViewerOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -120,6 +122,7 @@ const Hero = ({ logo }) => {
                 className="btn btn-secondary hero-btn-secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setStoryViewerOpen(true)}
               >
                 <Play size={20} />
                 Watch Story
@@ -166,6 +169,10 @@ const Hero = ({ logo }) => {
           </div>
         </div>
       </div>
+
+      {storyViewerOpen && (
+        <StoryViewer onClose={() => setStoryViewerOpen(false)} />
+      )}
     </section>
   );
 };

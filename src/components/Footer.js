@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
 import LegalModals from "./LegalModals";
+import FAQ from "./FAQ";
 
 const Footer = ({ logo }) => {
   const currentYear = new Date().getFullYear();
+  const [isFAQOpen, setIsFAQOpen] = useState(false);
 
   const footerLinks = {
     products: [
@@ -13,23 +15,30 @@ const Footer = ({ logo }) => {
       { name: "Green", href: "#products" },
     ],
     company: [
-      { name: "About Us", href: "#about" },
-      { name: "Our Story", href: "#story" },
-      { name: "Careers", href: "#careers" },
+      { name: "About Us", href: "/about-us" },
+      { name: "Our Story", href: "/our-story" },
     ],
     support: [
       { name: "Contact", href: "#contact" },
-      { name: "FAQ", href: "#faq" },
-      { name: "Shipping", href: "#shipping" },
+      { name: "FAQ", href: "#", onClick: () => setIsFAQOpen(true) },
     ],
   };
 
   const socialLinks = [
-    { icon: <Instagram size={20} />, href: "#", label: "Instagram" },
-    { icon: <Twitter size={20} />, href: "#", label: "Twitter" },
-    { icon: <Facebook size={20} />, href: "#", label: "Facebook" },
-    { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" },
+    {
+      icon: <Instagram size={20} />,
+      href: "https://www.instagram.com/tearshxd/",
+      label: "Instagram",
+    },
   ];
+
+  // Handle link click with onClick if available
+  const handleLinkClick = (link, event) => {
+    if (link.onClick) {
+      event.preventDefault();
+      link.onClick();
+    }
+  };
 
   return (
     <footer className="footer">
@@ -106,7 +115,12 @@ const Footer = ({ logo }) => {
               <ul>
                 {footerLinks.support.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href}>{link.name}</a>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleLinkClick(link, e)}
+                    >
+                      {link.name}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -122,13 +136,16 @@ const Footer = ({ logo }) => {
           viewport={{ once: true }}
         >
           <div className="footer-bottom-content">
-            <p>&copy; {currentYear} Tears. All rights reserved.</p>
+            <p>
+              &copy; {currentYear} TEARS SAUCES PVT LTD. All rights reserved.
+            </p>
             <div className="footer-legal">
               <LegalModals />
             </div>
           </div>
         </motion.div>
       </div>
+      <FAQ isOpen={isFAQOpen} onClose={() => setIsFAQOpen(false)} />
     </footer>
   );
 };
