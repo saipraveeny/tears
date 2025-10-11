@@ -207,6 +207,10 @@ const Products = ({
             <div className="great-deal-desc">
               <b>3 bottles of green</b> for just{" "}
               <span className="great-deal-price">₹650.00</span>
+              <span className="discount-badge">Save ₹100</span>
+            </div>
+            <div className="original-price">
+              <span className="strikethrough">₹750.00</span>
             </div>
           </div>
         </motion.div>

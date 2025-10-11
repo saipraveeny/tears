@@ -1138,6 +1138,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.discount-applied {
+  font-size: 0.9rem;
+  color: #ff3b30;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.discount-amount {
+  font-weight: 700;
+}
 .confirmation-content {
   width: 100%;
   max-width: 400px;
@@ -1445,6 +1456,8 @@
   color: #919aac;
   font-weight: 500;
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  position: relative;
+  display: inline-block;
 }
 .great-deal-price {
   color: hwb(4 14% 6% / 0.897);
@@ -1462,6 +1475,35 @@
   letter-spacing: 0.01em;
   box-shadow: 0 2px 8px rgba(80, 80, 180, 0.08);
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+.discount-badge {
+  display: inline-block;
+  background-color: #ff3b30;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  transform: rotate(-5deg);
+  animation: pulse 2s infinite;
+}
+.original-price {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-gray);
+}
+.strikethrough {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+@keyframes pulse {
+  0%, 100% {
+    transform: rotate(-5deg) scale(1);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.05);
+  }
 }
 @media (max-width: 600px) {
   .great-deal-panel {

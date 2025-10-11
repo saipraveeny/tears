@@ -169,21 +169,60 @@ function App() {
             {cart.length > 0 && (
               <div className="cart-footer">
                 <div className="cart-total">
-                  Total:{" "}
-                  {cart
-                    .reduce(
+                  {(() => {
+                    // Check if there are 3 or more Green bottles
+                    const greenBottles = cart.find(item => item.name === "Green");
+                    const greenBottleCount = greenBottles ? greenBottles.qty : 0;
+                    const hasDiscount = greenBottleCount >= 3;
+                    
+                    // Calculate total
+                    let total = cart.reduce(
                       (sum, item) =>
                         sum +
                         parseFloat(item.price.replace(/[^\d.]/g, "")) *
                           item.qty,
                       0
-                    )
-                    .toLocaleString("en-IN", {
-                      style: "currency",
-                      currency: "INR",
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
+                    );
+                    
+                    // Apply discount if 3 or more Green bottles
+                    if (hasDiscount) {
+                      // Calculate how many sets of 3 bottles
+                      const discountSets = Math.floor(greenBottleCount / 3);
+                      // Each set gets 100 rupees discount (750 -> 650)
+                      const discountAmount = discountSets * 100;
+                      total -= discountAmount;
+                      
+                      return (
+                        <>
+                          Total:{" "}
+                          {total.toLocaleString("en-IN", {
+                            style: "currency",
+                            currency: "INR",
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                          {hasDiscount && (
+                            <div className="discount-applied">
+                              <span className="discount-text">Discount Applied: </span>
+                              <span className="discount-amount">₹{discountAmount.toFixed(2)}</span>
+                            </div>
+                          )}
+                        </>
+                      );
+                    }
+                    
+                    return (
+                      <>
+                        Total:{" "}
+                        {total.toLocaleString("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </>
+                    );
+                  })()}
                 </div>
                 <button
                   className="btn btn-primary"
