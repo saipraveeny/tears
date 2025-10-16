@@ -238,7 +238,9 @@ const LegalModals = () => {
             chosen by You. Refund will be credited to original payment method
             within 7-8 business days
           </li>
-          <li>No replacements are accepted for this products</li>
+          <li>
+            No replacements/return/exchange are accepted for this products.
+          </li>
           <li>Defective packaging</li>
         </ul>
         <p>
