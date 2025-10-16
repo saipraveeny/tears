@@ -226,7 +226,16 @@ const LegalModals = () => {
           opened. However, refunds or replacements are offered for:
         </p>
         <ul>
-          <li>Damaged or incorrect items</li>
+          <li>
+            Damaged or incorrect items - will be refunding your money within 7-8
+            working days{" "}
+          </li>
+          <li>
+            Except for Cash On Delivery transaction, refund, if any, shall be
+            made at the same Issuing Bank from where Transaction Price was
+            received, or through any other method available on the Platform, as
+            chosen by You.
+          </li>
           <li>Defective packaging</li>
         </ul>
         <p>
@@ -282,9 +291,11 @@ const LegalModals = () => {
         <p>For any queries regarding these Terms:</p>
         <div className="contact-info">
           <p>
-            📍 Tears Hot Sauces
+            📍 TEARS SAUCES PVT LTD
             <br />
-            Hyderabad, Telangana, India
+            TEARS SAUCES PRIVATE LIMITED, H NO 19-94 A, SARK GARDEN VILLAS, SREE
+            NILAYAM, MOKILA , Mokila , Shankarpalle, Rangareddy,
+            Telangana-501203
           </p>
           <p>📧 tearshxd@gmail.com</p>
         </div>

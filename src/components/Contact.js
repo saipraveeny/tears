@@ -101,7 +101,10 @@ const Contact = () => {
     {
       icon: <MapPin className="contact-icon" />,
       title: "Address",
-      value: "Hyderabad, Telangana, India",
+      value: `TEARS SAUCES PRIVATE LIMITED
+            ,H NO 19-94 A, SARK GARDEN VILLAS, SREE
+            NILAYAM, MOKILA , Mokila , Shankarpalle,
+            Rangareddy, Telangana-501203`,
       link: "#",
     },
   ];

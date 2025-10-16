@@ -123,13 +123,6 @@ const Testimonials = () => {
           <p className="cta-text">
             Join thousands of satisfied customers and culinary professionals
           </p>
-          <motion.button
-            className="btn btn-secondary"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Read More Reviews
-          </motion.button>
         </motion.div>
       </div>
     </section>

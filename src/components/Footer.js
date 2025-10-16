@@ -139,6 +139,7 @@ const Footer = ({ logo }) => {
             <p>
               &copy; {currentYear} TEARS SAUCES PVT LTD. All rights reserved.
             </p>
+            <p>GST : 36AAMCT1318F1ZF</p>
             <div className="footer-legal">
               <LegalModals />
             </div>
