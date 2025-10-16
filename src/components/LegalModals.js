@@ -212,6 +212,7 @@ const LegalModals = () => {
           <li>
             Delivery times may vary depending on location and courier services.
           </li>
+          <li>Orders will be delivered within 3-4 business days</li>
           <li>
             We are not liable for delays beyond our control (e.g., courier
             delays, natural calamities).
@@ -234,8 +235,10 @@ const LegalModals = () => {
             Except for Cash On Delivery transaction, refund, if any, shall be
             made at the same Issuing Bank from where Transaction Price was
             received, or through any other method available on the Platform, as
-            chosen by You.
+            chosen by You. Refund will be credited to original payment method
+            within 7-8 business days
           </li>
+          <li>No replacements are accepted for this products</li>
           <li>Defective packaging</li>
         </ul>
         <p>
