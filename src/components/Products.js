@@ -11,7 +11,7 @@ import greenImage from "../assets/green.png";
 // Import modal images
 import wildJpg from "../assets/wild.jpg";
 import glitchJpg from "../assets/glitch.jpg";
-import greenJpg from "../assets/green.png";
+import greenJpg from "../assets/green.jpg";
 
 const Products = ({
   addToCart,
@@ -29,8 +29,9 @@ const Products = ({
   const products = [
     {
       id: 1,
-      name: "Green",
-      description: "Classic green chilli with citrus undertones",
+      name: "Green (100ml)",
+      description:
+        "Classic green chilli with citrus undertones, with coriander seeds, black pepper, capsicum and kaffir lime",
       heatLevel: 2,
       price: "₹250.00",
       color: "#548c50",
@@ -271,7 +272,7 @@ const Products = ({
                     className="modal-variant-image modal-variant-image-fill"
                   />
                 )}
-                {selectedProduct.name === "Green" && (
+                {selectedProduct.name === "Green (100ml)" && (
                   <img
                     src={greenJpg}
                     alt="Green Hot Sauce"
